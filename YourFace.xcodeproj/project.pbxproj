@@ -30,10 +30,10 @@
 		91EF4FBC158FE52B00E6EC2D /* YourFace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourFace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91EF4FC0158FE52B00E6EC2D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		91EF4FC2158FE52B00E6EC2D /* MacRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MacRuby.framework; path = Library/Frameworks/MacRuby.framework; sourceTree = DEVELOPER_DIR; };
-		91EF4FC9158FE52B00E6EC2D /* YourFace-Info.plist */ = {isa = PBXFileReference; path = "YourFace-Info.plist"; sourceTree = "<group>"; };
+		91EF4FC9158FE52B00E6EC2D /* YourFace-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YourFace-Info.plist"; sourceTree = "<group>"; };
 		91EF4FCB158FE52B00E6EC2D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		91EF4FCD158FE52B00E6EC2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		91EF4FCF158FE52B00E6EC2D /* YourFace-Prefix.pch */ = {isa = PBXFileReference; path = "YourFace-Prefix.pch"; sourceTree = "<group>"; };
+		91EF4FCF158FE52B00E6EC2D /* YourFace-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YourFace-Prefix.pch"; sourceTree = "<group>"; };
 		91EF4FD2158FE52B00E6EC2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		91EF4FD5158FE52B00E6EC2D /* rb_main.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = rb_main.rb; sourceTree = "<group>"; };
 		91EF4FD7158FE52B00E6EC2D /* AppDelegate.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = AppDelegate.rb; sourceTree = "<group>"; };
