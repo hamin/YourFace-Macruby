@@ -121,11 +121,12 @@
 /* Begin PBXLegacyTarget section */
 		91EF4FC4158FE52B00E6EC2D /* Deployment */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = "--compile --embed";
+			buildArgumentsString = "--compile --embed --gem macruby-face";
 			buildConfigurationList = 91EF4FDE158FE52B00E6EC2D /* Build configuration list for PBXLegacyTarget "Deployment" */;
 			buildPhases = (
 			);
 			buildToolPath = /usr/local/bin/macruby_deploy;
+			buildWorkingDirectory = "";
 			dependencies = (
 				91EF4FC6158FE52B00E6EC2D /* PBXTargetDependency */,
 			);
@@ -342,6 +343,7 @@
 				91EF4FDD158FE52B00E6EC2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		91EF4FDE158FE52B00E6EC2D /* Build configuration list for PBXLegacyTarget "Deployment" */ = {
 			isa = XCConfigurationList;
@@ -350,6 +352,7 @@
 				91EF4FE0158FE52B00E6EC2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
