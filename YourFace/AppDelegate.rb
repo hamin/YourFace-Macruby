@@ -90,12 +90,13 @@ class AppDelegate
             key = ""
             secret = ""
             
+            
             client = Face.get_client(:api_key => key, :api_secret => secret)
             resp = client.faces_recognize(:uids => ['all@aminharis7'], :file => File.new(filename, 'rb'), :detector => "normal")
             
-            if resp.nil?
+            if resp["photos"].first["tags"].size == 0 || resp["photos"].first["tags"].first["uids"].size == 0
                 NSLog("IT IS NIL")
-                @recognized_label.stringValue = "Sorry...I don't know Youre Face :("
+                @recognized_label.stringValue = "Sorry...I don't know Your Face :("
             else
                 NSLog("IT HAS SOMETHING")
                 NSLog(resp.description)
