@@ -84,6 +84,9 @@ class AppDelegate
             filename = '/Users/haris.amin/Desktop/YourFace/haris_test_pic.jpeg'
             image_data.writeToFile(filename, atomically:true)
             
+            # You can also write to file the good ol' ruby way if you like :)
+            # File.open(filename, 'wb') {|f| f.write(image_data.to_str) }
+            
             key = ""
             secret = ""
             
