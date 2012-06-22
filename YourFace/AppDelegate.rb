@@ -7,11 +7,14 @@
 #
 
 require 'face'
+require 'hipster'
 
 class AppDelegate
     attr_accessor :window, :camera_preview, :picture_output, :recognized_label
     
     def applicationDidFinishLaunching(a_notification)
+        @hipsters_array = [] # For some fun :)
+        
         # Insert code here to initialize your application
         @detector = CIDetector.detectorOfType "CIDetectorTypeFace", context:nil, options: {CIDetectorAccuracy: CIDetectorAccuracyLow}
         
@@ -61,15 +64,26 @@ class AppDelegate
         camera_preview.layer.addSublayer @preview_layer
     end
     
+    def add_face
+        @hipsters_array << Hipster.new(@preview_layer)
+    end
+    
     def captureOutput(captureOutput, didOutputSampleBuffer:sampleBuffer, fromConnection:connection)
         imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         image = CIImage.imageWithCVImageBuffer(imageBuffer)
         
         features = @detector.featuresInImage(image)
         
+        add_face while features.size > @hipsters_array.size
+        
+        hipsters = @hipsters_array.dup
         features.each do |feature|
+            NSLog("IT CAME TO FEATURE")
             #NSLog "Feature left - #{feature.leftEyePosition}"
+            matched_face = hipsters.sort_by! {|s| s.feature_intersection_size(feature) }.pop
+            matched_face.rearrange_features feature
         end
+        hipsters.each { |e| e.hide_features } # any remaining hipsters have exited the frame and should be hidden.
         
         nil
     end
