@@ -84,20 +84,21 @@ class AppDelegate
             filename = '/Users/haris.amin/Desktop/YourFace/haris_test_pic.jpeg'
             image_data.writeToFile(filename, atomically:true)
             
-            key = '' 
-            secret ''
+            key = ""
+            secret = ""
             
             client = Face.get_client(:api_key => key, :api_secret => secret)
             resp = client.faces_recognize(:uids => ['all@aminharis7'], :file => File.new(filename, 'rb'), :detector => "normal")
             
             if resp.nil?
                 NSLog("IT IS NIL")
-                @recognized_label.stringValue = "NOTHING"
+                @recognized_label.stringValue = "Sorry...I don't know Youre Face :("
             else
                 NSLog("IT HAS SOMETHING")
                 NSLog(resp.description)
-                @recognized_label.stringValue = "SOMETHING"
-                #@recognized_label.stringValue = resp['photos'].first["tags"].first["label"]
+                uid = resp["photos"].first["tags"].first["uids"].first["uid"].split('@').first
+                pretty_uid = uid.split(/(?=[A-Z])/).join(' ').capitalize #  Making it look pretty (e.g. 'DrNic' -> 'Dr Nic')
+                @recognized_label.stringValue =  "Nice Face #{pretty_uid} :)"
             end
             
         end
