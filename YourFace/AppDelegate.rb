@@ -10,9 +10,13 @@ require 'face'
 require 'hipster'
 
 class AppDelegate
-    attr_accessor :window, :camera_preview, :picture_output, :recognized_label
+    attr_accessor :window, :camera_preview, :picture_output, :recognized_label, :face_key, :face_secret
     
     def applicationDidFinishLaunching(a_notification)
+        # For Face.com recognition API call
+        @face_key = ""
+        @face_secret = ""
+        
         @hipsters_array = [] # For some fun :)
         
         # Insert code here to initialize your application
@@ -39,8 +43,6 @@ class AppDelegate
         @picture_output.outputSettings = output_settings
         session.addOutput @picture_output
         
-        #output.setVideoSettings KCVPixelBufferPixelFormatTypeKey => KCVPixelFormatType_32BGRA, KCVPixelBufferWidthKey => width, KCVPixelBufferHeightKey => height
-        
         session.addInput input
         session.addOutput output
         
@@ -51,14 +53,8 @@ class AppDelegate
         
         session.startRunning
         
-        #window.setFrame [0.0, 0.0, width, height], display:true, animate:true
         window.center
         window.delegate = self
-        
-        #window.contentView.wantsLayer = true
-        #window.contentView.layer.addSublayer @preview_layer
-        
-        #window.orderFrontRegardless
         
         camera_preview.wantsLayer = true
         camera_preview.layer.addSublayer @preview_layer
@@ -78,8 +74,6 @@ class AppDelegate
         
         hipsters = @hipsters_array.dup
         features.each do |feature|
-            NSLog("IT CAME TO FEATURE")
-            #NSLog "Feature left - #{feature.leftEyePosition}"
             matched_face = hipsters.sort_by! {|s| s.feature_intersection_size(feature) }.pop
             matched_face.rearrange_features feature
         end
@@ -95,24 +89,20 @@ class AppDelegate
         call_back = Proc.new do |img_buffer, error|
             NSLog "IT CAME TO CALLBACK"
             image_data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation img_buffer
-            filename = '/Users/haris.amin/Desktop/YourFace/haris_test_pic.jpeg'
+            filename = "#{Dir.pwd}/test_pic.jpeg"
             image_data.writeToFile(filename, atomically:true)
             
             # You can also write to file the good ol' ruby way if you like :)
             # File.open(filename, 'wb') {|f| f.write(image_data.to_str) }
             
-            key = ""
-            secret = ""
-            
-            
-            client = Face.get_client(:api_key => key, :api_secret => secret)
+            client = Face.get_client(:api_key => @face_key, :api_secret => @face_secret)
             resp = client.faces_recognize(:uids => ['all@aminharis7'], :file => File.new(filename, 'rb'), :detector => "normal")
             
             if resp["photos"].first["tags"].size == 0 || resp["photos"].first["tags"].first["uids"].size == 0
-                NSLog("IT IS NIL")
+                NSLog("Face Found!")
                 @recognized_label.stringValue = "Sorry...I don't know Your Face :("
             else
-                NSLog("IT HAS SOMETHING")
+                NSLog("NO FACE Found!!!")
                 NSLog(resp.description)
                 uid = resp["photos"].first["tags"].first["uids"].first["uid"].split('@').first
                 pretty_uid = uid.split(/(?=[A-Z])/).join(' ').capitalize #  Making it look pretty (e.g. 'DrNic' -> 'Dr Nic')
