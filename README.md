@@ -12,7 +12,7 @@ These instructions have been written for OS X.
 
 ### Pre-requisites ###
   * [MacRuby](http://macruby.org) Install MacRuby (nightly release should be fine)
-  * [Face.com API Key](http://developers.face.com/) Download libspotify and your app key
+  * [Face.com API Key](http://developers.face.com/)
     
 ### Install dependencies ###
 
